@@ -10,7 +10,10 @@ const createNew = async (req, res) => {
     if (!admin) {
       return res.status(500).json({ success: false, message: "Admin settings not found" });
     }
-
+    // check if user exists & user's subscribedMess is the same as the one in the request
+    //const user = await oneStopUserModel.findOne({ outlookEmail: req.body.outlookEmail });
+    const user = {subscribedMess:req.body.subscribedMess}
+=======
     const { opiStartDate, opiEndDate } = admin;
 
     // Get current date in the desired timezone (e.g., 'Asia/Kolkata' for IST)
@@ -27,7 +30,6 @@ const createNew = async (req, res) => {
     // Check if user exists & user's subscribedMess is the same as the one in the request
     const user = await oneStopUserModel.findOne({ outlookEmail: req.body.outlookEmail });
 
-    // const user = { subscribedMess: req.body.subscribedMess };
     if (!user) {
       return res.status(400).json({ success: false, message: 'User not found' });
     }
